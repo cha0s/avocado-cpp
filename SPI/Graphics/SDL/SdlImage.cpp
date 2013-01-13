@@ -300,6 +300,10 @@ void SdlImage::render(int x, int y, Image *destination, int alpha, DrawMode mode
 	}
 }
 
+void SdlImage::saveToFile(const boost::filesystem::path &filename) {
+	AVOCADO_UNUSED(filename);
+}
+
 void SdlImage::setPixelAt(int x, int y, unsigned int pixel) {
 	if (NULL == surface) return;
 

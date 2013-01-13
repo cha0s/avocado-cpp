@@ -73,6 +73,8 @@ public:
 
 	void render(int x, int y, Image *destination, int alpha = 255, DrawMode mode = DrawMode_Blend, int sx = 0, int sy = 0, int sw = 0, int sh = 0) const AVOCADO_ENSURE_STACK_ALIGNED_FOR_SSE;
 
+	void saveToFile(const boost::filesystem::path &filename);
+
 	void setPixelAt(int x, int y, unsigned int pixel);
 
 	int width() const;

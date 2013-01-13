@@ -50,6 +50,7 @@ private:
 	static v8::Handle<v8::Value> Height(const v8::Arguments &args);
 	static v8::Handle<v8::Value> PixelAt(const v8::Arguments &args);
 	static v8::Handle<v8::Value> Render(const v8::Arguments &args);
+	static v8::Handle<v8::Value> SaveToFile(const v8::Arguments &args);
 	static v8::Handle<v8::Value> SetPixelAt(const v8::Arguments &args);
 	static v8::Handle<v8::Value> Width(const v8::Arguments &args);
 	static v8::Handle<v8::Value> Load(const v8::Arguments &args);

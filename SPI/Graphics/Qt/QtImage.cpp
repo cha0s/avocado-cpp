@@ -40,7 +40,7 @@ QtImage::QtImage(int width, int height)
 QtImage::QtImage(const boost::filesystem::path &uri)
 	: Image()
 {
-	qImage = new QImage(uri.c_str());
+	qImage = new QImage(QString::fromStdString(uri.string()));
 
 	if (!qImage || qImage->isNull()) throw std::runtime_error(
 		"Qt couldn't load the image."
@@ -146,6 +146,10 @@ void QtImage::render(int x, int y, Image *destination, int alpha, DrawMode mode,
 		*qImage,
 		QRect(sx, sy, sw, sh)
 	);
+}
+
+void QtImage::saveToFile(const boost::filesystem::path &filename) {
+	qImage->save(QString::fromStdString(filename.string()));
 }
 
 void QtImage::setPixelAt(int x, int y, unsigned int pixel) {

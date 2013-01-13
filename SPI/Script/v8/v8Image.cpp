@@ -46,6 +46,7 @@ void v8Image::initialize(Handle<Object> target) {
 	V8_SET_PROTOTYPE_METHOD(constructor_template, "%height"       , v8Image::Height       );
 	V8_SET_PROTOTYPE_METHOD(constructor_template, "%pixelAt"      , v8Image::PixelAt      );
 	V8_SET_PROTOTYPE_METHOD(constructor_template, "%render"       , v8Image::Render       );
+	V8_SET_PROTOTYPE_METHOD(constructor_template, "%saveToFile"   , v8Image::SaveToFile   );
 	V8_SET_PROTOTYPE_METHOD(constructor_template, "%setPixelAt"   , v8Image::SetPixelAt   );
 	V8_SET_PROTOTYPE_METHOD(constructor_template, "%width"        , v8Image::Width        );
 
@@ -395,6 +396,33 @@ v8::Handle<v8::Value> v8Image::Render(const v8::Arguments &args) {
 		dimensions->Get(1)->Int32Value(),
 		dimensions->Get(2)->Int32Value(),
 		dimensions->Get(3)->Int32Value()
+	);
+
+	return v8::Undefined();
+}
+
+v8::Handle<v8::Value> v8Image::SaveToFile(const v8::Arguments &args) {
+	HandleScope scope;
+
+	v8Image *imageWrapper = ObjectWrap::Unwrap<v8Image>(args.Holder());
+
+	if (NULL == imageWrapper) {
+		return ThrowException(v8::Exception::ReferenceError(String::NewSymbol(
+			"Image::saveToFile(): NULL Holder."
+		)));
+	}
+
+	std::string filename = V8::stringToStdString(args[0].As<String>());
+
+	boost::filesystem::path parentPath = FS::qualifyPath(
+		FS::resourceRoot(),
+		boost::filesystem::path(
+			filename
+		).parent_path()
+	);
+
+	imageWrapper->image->saveToFile(
+		parentPath / boost::filesystem::path(filename).filename()
 	);
 
 	return v8::Undefined();

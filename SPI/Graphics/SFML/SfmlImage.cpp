@@ -163,6 +163,10 @@ void SfmlImage::render(int x, int y, Image *destination, int alpha, DrawMode mod
 	);
 }
 
+void SfmlImage::saveToFile(const boost::filesystem::path &filename) {
+	renderTexture->getTexture().copyToImage().saveToFile(filename.string());
+}
+
 void SfmlImage::setPixelAt(int x, int y, unsigned int pixel) {
 	AVOCADO_UNUSED(x);
 	AVOCADO_UNUSED(y);

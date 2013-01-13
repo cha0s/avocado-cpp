@@ -121,6 +121,11 @@ public:
 	virtual void render(int x, int y, Image *destination, int alpha = 255, DrawMode mode = DrawMode_Blend, int sx = 0, int sy = 0, int sw = 0, int sh = 0) const = 0;
 
 	/**
+	 * Save the image to a file.
+	 */
+	virtual void saveToFile(const boost::filesystem::path &filename) = 0;
+
+	/**
 	 * Set the pixel color at a given x, y coordinate.
 	 */
 	virtual void setPixelAt(int x, int y, unsigned int pixel) = 0;

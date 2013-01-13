@@ -36,43 +36,6 @@ module.exports = class extends AbstractState
 		# Catch the quit event (window close event).
 		Graphics.window.on 'quit.InitialState', => @main.quit()
 		
-		Environment = require 'Environment/2D/Environment'
-		Rectangle = require 'Extension/Rectangle'
-		Room = require 'Environment/2D/Room'
-		
-		environment = new Environment()
-		
-		# 1-12 rooms
-		rooms = for i in [0...1 + Math.floor Math.random() * 12]
-			new Room()
-			
-		rooms = for room in rooms
-			
-			roomSize = [
-				30 + Math.floor Math.random() * 80
-				30 + Math.floor Math.random() * 80
-			]
-		
-			# 1-5 areas
-			areas: for i in [0...1 + Math.floor Math.random() * 5]
-				
-				areaSize = [
-					Math.min roomSize[0], 10 + Math.floor Math.random() * 25
-					Math.min roomSize[1], 10 + Math.floor Math.random() * 25
-				]
-				
-				rect: Rectangle.compose(
-					[
-						Math.floor Math.random() * (roomSize[0] - areaSize[0])
-						Math.floor Math.random() * (roomSize[1] - areaSize[1])
-					]
-					areaSize
-				)
-			
-			size: roomSize
-				
-		console.log rooms
-			
 		upon.all([
 		])
 	
