@@ -82,12 +82,9 @@ public:
 	virtual void initialize();
 
 	/**
-	 * Load the engine core.
-	 *
-	 * @return
-	 *   A vector of strings; the filenames in order of loading.
+	 * Load scripts at a specified path.
 	 */
-	std::vector<boost::filesystem::path> loadCore();
+	void loadScripts(const boost::filesystem::path &path);
 
 	/**
 	 * Precompile the passed in code, inferring any precompiler from the

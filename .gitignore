@@ -1,0 +1,6 @@
+.cproject
+.project
+Makefile
+obj
+*.spii
+*.so*

@@ -102,7 +102,7 @@ everything.depends = dependencies spiis all
 
 QMAKE_EXTRA_TARGETS += dependencies spiis everything gtest
 
-QMAKE_CLEAN += ../../SPII/*.spii
+QMAKE_CLEAN += SPII/*.spii
 QMAKE_CLEAN += $$system('find SPI -name "*.o" -o -name "*.so*"')
 
 QMAKE_LFLAGS += -rdynamic

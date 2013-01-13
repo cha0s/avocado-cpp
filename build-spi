@@ -11,4 +11,5 @@ do
 	cd $p
 	
 done
-find SPI -name '*.spii' -exec cp -u {} ../../SPII \;
+mkdir -p SPII
+find SPI -name '*.spii' -exec cp -u {} SPII \;

@@ -83,21 +83,20 @@ void ScriptService::initialize() {
 
 	// CoffeeScript. <3
 	Script *coffeeCompiler = scriptFromFile(
-		FS::engineRoot() / "compiler" / "CoffeeScript.js"
+		FS::exePath() / "compilers" / "CoffeeScript.js"
 	);
 	coffeeCompiler->execute();
 }
 
-std::vector<boost::filesystem::path> ScriptService::loadCore() {
+void ScriptService::loadScripts(const boost::filesystem::path &path) {
 
 	// Gather up all the core files.
 	vector<filesystem::path> filenames = FS::findFilenames(
-		FS::engineRoot() / "core",
-		regex("(.*\\.js|.*\\.coffee)")
+		path,
+		regex(".*(\\.coffee|\\.js)$")
 	);
 
 	// Compile the core files.
-	vector<boost::filesystem::path> scripts;
 	for (unsigned int i = 0; i < filenames.size(); i++) {
 
 		try {
@@ -110,8 +109,6 @@ std::vector<boost::filesystem::path> ScriptService::loadCore() {
 					filenames[i]
 				)
 			)->execute();
-
-			scripts.push_back(filenames[i]);
 		}
 		catch (std::exception &e) {
 
@@ -119,8 +116,6 @@ std::vector<boost::filesystem::path> ScriptService::loadCore() {
 			throw script_system_load_core_error(e.what());
 		}
 	}
-
-	return scripts;
 }
 
 Script *ScriptService::scriptFromFile(const boost::filesystem::path &filename) {

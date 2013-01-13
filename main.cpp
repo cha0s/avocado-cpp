@@ -19,26 +19,14 @@ int main(int argc, char **argv) {
 
 	try {
 
-		// Set <EXEPATH>.
-		avo::FS::setExePath(boost::filesystem::canonical(boost::filesystem::absolute(
-			boost::filesystem::path(argv[0]).parent_path() / ".." / "..",
-			boost::filesystem::current_path()
-		)));
-
-		// Set engine root to <EXEPATH>/engine.
-		avo::FS::setEngineRoot(avo::FS::exePath() / "engine");
-
-		// The native main code's filepath.
-		boost::filesystem::path nativeMainPath = avo::FS::engineRoot() / "main" / "native";
-
-		// Set resource root to <EXEPATH>/resource.
-		avo::FS::setResourceRoot(avo::FS::exePath() / "resource");
-
 		// Declare the supported options.
 		po::options_description desc("Allowed options");
 		desc.add_options()
 		    ("help", "produce help message")
 		    ("deploy", po::value<std::string>(), "deployment target (native, web)")
+		    ("exe-path", po::value<std::string>(), "set the execution path")
+		    ("engine-root", po::value<std::string>(), "set the engine root")
+		    ("resource-root", po::value<std::string>(), "set the resource root")
 		;
 
 		po::variables_map vm;
@@ -50,6 +38,45 @@ int main(int argc, char **argv) {
 		    return 1;
 		}
 
+		boost::filesystem::path exePath;
+		if (vm.count("exe-path")) {
+			exePath = vm["exe-path"].as<std::string>();
+		}
+		else {
+			exePath = boost::filesystem::path(argv[0]).parent_path();
+		}
+
+		// Set <EXEPATH>.
+		avo::FS::setExePath(boost::filesystem::canonical(boost::filesystem::absolute(
+			exePath,
+			boost::filesystem::current_path()
+		)));
+
+		boost::filesystem::path engineRoot;
+		if (vm.count("engine-root")) {
+			engineRoot = vm["engine-root"].as<std::string>();
+		}
+		else {
+			engineRoot = avo::FS::exePath() / "avocado";
+		}
+
+		// Set engine root to <EXEPATH>/engine.
+		avo::FS::setEngineRoot(engineRoot);
+
+		// The native main code's filepath.
+		boost::filesystem::path scriptPath = avo::FS::exePath();
+
+		boost::filesystem::path resourceRoot;
+		if (vm.count("resource-root")) {
+			resourceRoot = vm["resource-root"].as<std::string>();
+		}
+		else {
+			resourceRoot = avo::FS::exePath() / "resource";
+		}
+
+		// Set resource root to <EXEPATH>/resource.
+		avo::FS::setResourceRoot(resourceRoot);
+
 		// We're only using v8 as a Script SPII (for now).
 		avo::SpiiLoader<avo::ScriptService> scriptServiceSpiiLoader;
 		scriptServiceSpiiLoader.implementSpi("v8");
@@ -59,26 +86,29 @@ int main(int argc, char **argv) {
 
 		// Initialize the engine.
 		avo::Script *initialize = ScriptService->scriptFromFile(
-			nativeMainPath / "Initialize.coffee"
+			scriptPath / "Initialize.coffee"
 		);
 		initialize->execute();
 
-		// Load core code.
-		std::vector<boost::filesystem::path> scripts = ScriptService->loadCore();
+		// Load engine.
+		ScriptService->loadScripts(avo::FS::engineRoot());
+
+		// Load scripts.
+		ScriptService->loadScripts(avo::FS::exePath() / "scripts");
 
 		avo::Script *main = ScriptService->scriptFromFile(
-			nativeMainPath / "Main.coffee"
+			scriptPath / "Main.coffee"
 		);
 
 		if (vm.count("deploy")) {
 
-			// Do the deployment.
-			avo::deploy(
-				argv[0],
-				vm["deploy"].as<std::string>(),
-				scripts,
-				ScriptService
-			);
+//			// Do the deployment.
+//			avo::deploy(
+//				argv[0],
+//				vm["deploy"].as<std::string>(),
+//				scripts,
+//				ScriptService
+//			);
 		}
 		else {
 
