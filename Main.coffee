@@ -18,34 +18,9 @@ Logger.registerStrategy Logger.stderrStrategy
 # SPI proxies.
 require 'proxySpiis'
 
-GlobalConfig = require 'GlobalConfig'
-GlobalConfig.CLIENT_PACKET_INTERVAL = 80
-GlobalConfig.SERVER_PACKET_INTERVAL = 80
-
-ipcSocket = require('Network/Ipc')()
-
-Server = class extends (require 'Network/Server')
-server = new Server
-	
-	type: 'ipc'
-	ipcSocket: ipcSocket
-
-server.begin()
-
-# Log and exit on error.
-server.on 'error', (error) ->
-
-	message = if error.stack?
-		error.stack
-	else
-		error.toString()
-	Logger.error message
-	
-	server.quit()
-
 timeCounter = new Timing.Counter()
 		
-Client = class extends (require 'Network/Client')
+Main = class extends (require 'Main')
 
 	constructor: ->
 		
@@ -55,6 +30,8 @@ Client = class extends (require 'Network/Client')
 		# will happen, and relieve the CPU between.
 		@lastTickTime = 0
 		@lastRenderTime = 0
+		
+		@stateChange = name: 'Demo', args: {}
 	
 	tick: ->
 		
@@ -70,13 +47,10 @@ Client = class extends (require 'Network/Client')
 		# Keep track of render timings.
 		@lastRenderTime = timeCounter.current()
 
-client = new Client
+main = new Main
 	
-	url: 'ipc://'
-	ipcSocket: ipcSocket
-
 # Log and exit on error.
-client.on 'error', (error) ->
+main.on 'error', (error) ->
 
 	message = if error.stack?
 		error.stack
@@ -84,9 +58,9 @@ client.on 'error', (error) ->
 		error.toString()
 	Logger.error message
 	
-	client.quit()
+	main.quit()
 
-client.on 'quit', ->
+main.on 'quit', ->
 
 	Sound.soundService.close()
 	Timing.timingService.close()
@@ -94,11 +68,11 @@ client.on 'quit', ->
 	Core.coreService.close()
 
 # GO!	
-client.begin()
+main.begin()
 
 # Run the hard loop until we receive the quit event.
 running = true
-client.on 'quit', -> running = false
+main.on 'quit', -> running = false
 while running
 	
 	# Update time and run intervals and timeouts.
@@ -108,8 +82,8 @@ while running
 	# Calculate the amount of time we can sleep and do so if we
 	# have enough time.
 	nextWake = Math.min(
-		client.lastTickTime + client.tickFrequency
-		client.lastRenderTime + client.renderFrequency
+		main.lastTickTime + main.tickFrequency
+		main.lastRenderTime + main.renderFrequency
 	) - timeCounter.current()
 	Timing.timingService.sleep(
 		nextWake * .8 if nextWake > 1

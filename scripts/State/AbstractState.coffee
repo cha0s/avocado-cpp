@@ -19,9 +19,8 @@ module.exports = class
 		
 		# By default, a State just immediately resolves its initialization
 		# promise.
-		defer = upon.defer()
-		defer.resolve()
-		defer.promise
+		upon.all([
+		])
 	
 	# When the State is entered by the engine, enter is called. You can use
 	# this to register input handlers and load resources that should be loaded
