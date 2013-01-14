@@ -87,7 +87,15 @@ void SfmlImage::drawCircle(int x, int y, int radius, int r, int g, int b, int a,
 	circle.setOutlineThickness(1);
 	circle.setPosition(x - radius, y - radius);
 
-	renderTexture->draw(circle);
+	renderTexture->draw(
+		circle,
+		sf::RenderStates(
+			DrawMode_Blend == drawMode ?
+				sf::BlendAlpha
+			:
+				sf::BlendNone
+			)
+	);
 }
 
 void SfmlImage::drawFilledBox(int x, int y, int w, int h, int r, int g, int b, int a, DrawMode drawMode) {
