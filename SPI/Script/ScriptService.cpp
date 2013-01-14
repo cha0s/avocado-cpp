@@ -103,7 +103,7 @@ void ScriptService::loadScripts(const boost::filesystem::path &path) {
 
 			// Try compiling...
 			scriptFromCode(
-				wrapFile(filenames[i]),
+				wrapFile(filenames[i], path),
 				FS::unqualifyPath(
 					FS::engineRoot(),
 					filenames[i]
@@ -125,16 +125,17 @@ Script *ScriptService::scriptFromFile(const boost::filesystem::path &filename) {
 	return scriptFromCode(preCompileCode(code, filename), filename);
 }
 
-std::string ScriptService::wrapFile(const boost::filesystem::path &filename) {
+std::string ScriptService::wrapFile(const boost::filesystem::path &filename, const boost::filesystem::path &basePath) {
 
 	boost::filesystem::path path = FS::unqualifyPath(
-		FS::engineRoot(),
+		basePath,
 		filename
 	);
 	path = path.remove_filename() / path.stem();
 
 	std::string moduleName = path.string().substr(1);
 
+	std::cerr << moduleName << std::endl;
 	std::string wrapped = "requires_['" + moduleName + "'] = function(module, exports) {\n";
 	wrapped += preCompileCode(
 		avo::FS::readString(filename),

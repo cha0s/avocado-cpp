@@ -74,7 +74,7 @@ void deploy(char *exeName, const std::string &target, const std::vector<boost::f
 			boost::filesystem::path path = targetEnginePath / "main" / target;
 			if ("Bindings" == filename.parent_path().stem().string()) {
 				path /= "Bindings";
-				code = scriptService->wrapFile(filename);
+				code = scriptService->wrapFile(filename, FS::engineRoot());
 			}
 			else {
 				code = scriptService->preCompileCode(
@@ -109,7 +109,7 @@ void deploy(char *exeName, const std::string &target, const std::vector<boost::f
 		boost::filesystem::path filename = scripts[i];
 		std::cerr << "Aggregating " << filename << "..." << std::endl;
 
-		aggregate += scriptService->wrapFile(filename);
+		aggregate += scriptService->wrapFile(filename, FS::engineRoot());
 	}
 
 	FS::writeString(

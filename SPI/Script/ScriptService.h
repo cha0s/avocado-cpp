@@ -105,7 +105,7 @@ public:
 	/**
 	 * Wrap a script file to simulate a module.
 	 */
-	std::string wrapFile(const boost::filesystem::path &filename);
+	std::string wrapFile(const boost::filesystem::path &filename, const boost::filesystem::path &basePath);
 
 	/**
 	 * Manages the concrete %ScriptService factory instance.
