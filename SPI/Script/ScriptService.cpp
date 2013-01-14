@@ -105,7 +105,7 @@ void ScriptService::loadScripts(const boost::filesystem::path &path) {
 			scriptFromCode(
 				wrapFile(filenames[i], path),
 				FS::unqualifyPath(
-					FS::engineRoot(),
+					path,
 					filenames[i]
 				)
 			)->execute();
