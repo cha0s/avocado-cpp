@@ -83,6 +83,7 @@ void SfmlImage::drawCircle(int x, int y, int radius, int r, int g, int b, int a,
 
 	sf::CircleShape circle;
 	circle.setRadius(radius);
+	circle.setFillColor(sf::Color(r, g, b, a));
 	circle.setOutlineColor(sf::Color(r, g, b, a));
 	circle.setOutlineThickness(1);
 	circle.setPosition(x - radius, y - radius);
