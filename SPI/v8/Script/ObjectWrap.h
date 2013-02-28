@@ -36,7 +36,7 @@ public:
 		if (handle.IsEmpty() || 0 == handle->InternalFieldCount()) return NULL;
 
 		// Return the object pointer.
-		return static_cast<T *>(handle->GetPointerFromInternalField(0));
+		return static_cast<T *>(handle->GetAlignedPointerFromInternalField(0));
 	}
 
 protected:
@@ -52,7 +52,7 @@ protected:
 		assert(handle->InternalFieldCount() > 0);
 		// Allocate and embed our object pointer.
 		handle_ = v8::Persistent<v8::Object>::New(handle);
-		handle_->SetPointerInInternalField(0, this);
+		handle_->SetAlignedPointerInInternalField(0, this);
 		// Mark it as 'weak' so GC will release it ASAP.
 		handle_.MakeWeak(this, WeakCallback);
 		handle_.MarkIndependent();

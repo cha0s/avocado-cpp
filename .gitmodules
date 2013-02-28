@@ -1,0 +1,3 @@
+[submodule "SPI/v8/deps/v8"]
+	path = SPI/v8/deps/v8
+	url = git://github.com/v8/v8.git
