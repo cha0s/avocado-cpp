@@ -13,8 +13,6 @@ sfmllib.commands += \
 	#
 	# Checkout the SFML git repository if it hasn't been yet.
 	#
-	test ! -d SFML \
-		&& git clone git://github.com/LaurentGomila/SFML.git; \
 	cd SFML; \
 	#
 	# Build SFML if necessary.
