@@ -31,7 +31,7 @@ Main = class extends (require 'Main')
 		@lastTickTime = 0
 		@lastRenderTime = 0
 		
-		@stateChange = name: 'Demo', args: {}
+		@stateChange = name: 'Initial', args: {}
 	
 	tick: ->
 		
