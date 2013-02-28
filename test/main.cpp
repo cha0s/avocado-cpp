@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 
-#include "../FS.h"
+#include "../main/FS.h"
 
 int main(int argc, char **argv) {
 	::testing::InitGoogleTest(&argc, argv);
@@ -14,10 +14,10 @@ int main(int argc, char **argv) {
 	);
 
 	// Set resource root to <EXEPATH>/test/resource.
-	avo::FS::setResourceRoot(avo::FS::exePath() / "test" / "resource");
+	avo::FS::setResourceRoot(avo::FS::exePath() / "resource");
 
 	// Set resource root to <EXEPATH>/test/resource.
-	avo::FS::setEngineRoot(avo::FS::exePath() / "test" / "engine");
+	avo::FS::setEngineRoot("..");
 
 	return RUN_ALL_TESTS();
 }

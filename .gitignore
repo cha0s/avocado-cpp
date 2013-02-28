@@ -1,6 +1,6 @@
 .cproject
 .project
-avocado
+avocado-cpp
 Makefile
 obj
 *.spii
