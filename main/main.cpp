@@ -7,8 +7,8 @@
 #include <boost/program_options/variables_map.hpp>
 
 #include "FS.h"
-#include "../SPI/Abstract/Script/ScriptService.h"
-#include "../SPI/Abstract/SpiiLoader.h"
+#include "Script/ScriptService.h"
+#include "SpiiLoader.h"
 
 namespace po = boost::program_options;
 

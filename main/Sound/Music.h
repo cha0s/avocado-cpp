@@ -6,7 +6,7 @@
 #include <string>
 
 #include "main/Factory.h"
-#include "SPI/Abstract/ResourceManager.h"
+#include "main/ResourceManager.h"
 
 namespace avo {
 

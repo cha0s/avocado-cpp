@@ -4,7 +4,7 @@
 #include "main/avocado-global.h"
 
 #include "main/FS.h"
-#include "SPI/Abstract/ResourceManager.h"
+#include "main/ResourceManager.h"
 
 #include "Image.h"
 

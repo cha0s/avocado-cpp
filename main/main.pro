@@ -18,11 +18,11 @@ SOURCES += \
 	\
 	FS.cpp \
 	\
-	../SPI/Abstract/Script/Script.cpp ../SPI/Abstract/Script/ScriptService.cpp \
-	../SPI/Abstract/Core/CoreService.cpp \
-	../SPI/Abstract/Graphics/GraphicsService.cpp ../SPI/Abstract/Graphics/Font.cpp ../SPI/Abstract/Graphics/Image.cpp ../SPI/Abstract/Graphics/Window.cpp \
-	../SPI/Abstract/Timing/TimingService.cpp ../SPI/Abstract/Timing/Counter.cpp \
-	../SPI/Abstract/Sound/SoundService.cpp ../SPI/Abstract/Sound/Sample.cpp ../SPI/Abstract/Sound/Music.cpp
+	Script/Script.cpp Script/ScriptService.cpp \
+	Core/CoreService.cpp \
+	Graphics/GraphicsService.cpp Graphics/Font.cpp Graphics/Image.cpp Graphics/Window.cpp \
+	Timing/TimingService.cpp Timing/Counter.cpp \
+	Sound/SoundService.cpp Sound/Sample.cpp Sound/Music.cpp
 
 HEADERS += \
 	\
@@ -32,12 +32,12 @@ HEADERS += \
 	\
 	FS.h \
 	\
-	../SPI/Abstract/SpiiLoader.h \
-	../SPI/Abstract/Script/Script.h ../SPI/Abstract/Script/ScriptService.h \
-	../SPI/Abstract/Core/CoreService.h \
-	../SPI/Abstract/Graphics/GraphicsService.h ../SPI/Abstract/Graphics/Font.h ../SPI/Abstract/Graphics/Image.h ../SPI/Abstract/Ui/Window.h \
-	../SPI/Abstract/Timing/TimingService.h ../SPI/Abstract/Timing/Counter.h \ 
-	../SPI/Abstract/Sound/SoundService.h ../SPI/Abstract/Sound/Sample.h ../SPI/Abstract/Sound/Music.h
+	SpiiLoader.h \
+	Script/Script.h Script/ScriptService.h \
+	Core/CoreService.h \
+	Graphics/GraphicsService.h Graphics/Font.h Graphics/Image.h Ui/Window.h \
+	Timing/TimingService.h Timing/Counter.h \ 
+	Sound/SoundService.h Sound/Sample.h Sound/Music.h
 
 INCLUDEPATH += deps ..
 
