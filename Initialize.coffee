@@ -1,5 +1,5 @@
-global = this
 
+# Implement require in the spirit of NodeJS.
 @require = (name) ->
 	
 	throw new Error "Module #{name} not found!" unless requires_[name]?
@@ -11,35 +11,11 @@ global = this
 		f = requires_[name]
 		requires_[name] = module: module
 		
-		f.call global, module, exports
+		f.call null, module, exports
 		
 	requires_[name].module.exports
 
-Core = require 'Core'
-Graphics = require 'Graphics'
-Timing = require 'Timing'
-Sound = require 'Sound'
-
-# Use SFML CoreService for now.
-Core.CoreService.implementSpi 'sfml'
-Core.coreService = new Core.CoreService()
-
-# Use SFML GraphicsService for now.
-Graphics.GraphicsService.implementSpi 'sfml'
-Graphics.graphicsService = new Graphics.GraphicsService()
-
-# Use SFML TimingService for now.
-Timing.TimingService.implementSpi 'sfml'
-Timing.timingService = new Timing.TimingService()
-
-# Use SFML SoundService for now.
-Sound.SoundService.implementSpi 'sfml'
-Sound.soundService = new Sound.SoundService()
-
-# Shoot for 60 FPS input and render.
-Timing.ticksPerSecondTarget = 120
-Timing.rendersPerSecondTarget = 80
-
+# Implement mock asynchronicity.
 handles = {}
 handleIndex = 1
 
@@ -49,7 +25,7 @@ handleFreeList = []
 setCallback = (fn, duration, O, isInterval) ->
 	
 	fn: fn
-	O: O ?= this
+	O: O
 	duration: duration / 1000
 	thisCall: Timing.TimingService.elapsed()
 	isInterval: isInterval
@@ -81,6 +57,8 @@ clearHandle = (handle) ->
 	
 		handleFreeIds[id] = true
 		handleFreeList.push id
+
+Timing = require 'Timing'
 
 Timing['%setTimeout'] = (fn, duration, O) -> newHandle fn, duration, O, false
 

@@ -1,22 +1,41 @@
-# Subclass avo.Main. We add a window as a render destination, tracking of tick
-# and render timings to implement CPU relief by sleeping between, and a hard
-# loop where we manually update the time elapsed, since we need to invoke
-# intervals and timeouts out-of-band.
+# Subclass avo.Main. We track tick and render timings to implement CPU relief
+# by sleeping between, and a hard loop where we manually update the time
+# elapsed, since we need to invoke intervals and timeouts out-of-band.
+
+Config = require 'Config'
 
 Core = require 'Core'
 Graphics = require 'Graphics'
 Timing = require 'Timing'
 Sound = require 'Sound'
 
-Logger = require 'Utility/Logger'
+# Use SFML CoreService for now.
+Core.CoreService.implementSpi Config.coreSpi
+Core.coreService = new Core.CoreService()
 
-# Register a stderr logging strategy.
-Logger.registerStrategy Logger.stderrStrategy
+# Use SFML GraphicsService for now.
+Graphics.GraphicsService.implementSpi Config.graphicsSpi
+Graphics.graphicsService = new Graphics.GraphicsService()
 
-@console = log: Logger.info
+# Use SFML TimingService for now.
+Timing.TimingService.implementSpi Config.timingSpi
+Timing.timingService = new Timing.TimingService()
+
+# Use SFML SoundService for now.
+Sound.SoundService.implementSpi Config.soundSpi
+Sound.soundService = new Sound.SoundService()
+
+# Shoot for 60 FPS input and render.
+Timing.ticksPerSecondTarget = Config.ticksPerSecondTarget
+Timing.rendersPerSecondTarget = Config.rendersPerSecondTarget
 
 # SPI proxies.
 require 'proxySpiis'
+
+# Register a stderr logging strategy, and implement console.log.
+Logger = require 'Utility/Logger'
+Logger.registerStrategy Logger.stderrStrategy
+@console = log: Logger.info
 
 timeCounter = new Timing.Counter()
 		
@@ -28,8 +47,7 @@ Main = class extends (require 'Main')
 		
 		# Keep track of ticks and renders so we can calculate when the next one
 		# will happen, and relieve the CPU between.
-		@lastTickTime = 0
-		@lastRenderTime = 0
+		@lastTickTime = @lastRenderTime = timeCounter.current()
 		
 		@stateChange = name: 'Initial', args: {}
 	
@@ -48,6 +66,7 @@ Main = class extends (require 'Main')
 		@lastRenderTime = timeCounter.current()
 
 main = new Main
+running = true
 	
 # Log and exit on error.
 main.on 'error', (error) ->
@@ -60,19 +79,18 @@ main.on 'error', (error) ->
 	
 	main.quit()
 
+# Close out services and stop running on quit.
 main.on 'quit', ->
+
+	running = false
 
 	Sound.soundService.close()
 	Timing.timingService.close()
 	Graphics.graphicsService.close()
 	Core.coreService.close()
 
-# GO!	
-main.begin()
-
 # Run the hard loop until we receive the quit event.
-running = true
-main.on 'quit', -> running = false
+main.begin()
 while running
 	
 	# Update time and run intervals and timeouts.
