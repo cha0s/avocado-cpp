@@ -1,10 +1,10 @@
 #ifndef AVOCADO_IMAGE_H
 #define AVOCADO_IMAGE_H
 
-#include "main/avocado-global.h"
+#include "core/avocado-global.h"
 
-#include "main/FS.h"
-#include "main/ResourceManager.h"
+#include "core/FS.h"
+#include "core/ResourceManager.h"
 
 namespace avo {
 

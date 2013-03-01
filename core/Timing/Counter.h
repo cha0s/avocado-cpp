@@ -1,9 +1,9 @@
 #ifndef AVOCADO_COUNTER_H
 #define AVOCADO_COUNTER_H
 
-#include "main/avocado-global.h"
+#include "core/avocado-global.h"
 
-#include "main/Factory.h"
+#include "core/Factory.h"
 
 namespace avo {
 

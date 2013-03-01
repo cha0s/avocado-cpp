@@ -1,9 +1,9 @@
 #ifndef AVOCADO_TIMINGSERVICE_H
 #define AVOCADO_TIMINGSERVICE_H
 
-#include "main/avocado-global.h"
+#include "core/avocado-global.h"
 
-#include "main/Factory.h"
+#include "core/Factory.h"
 
 namespace avo {
 

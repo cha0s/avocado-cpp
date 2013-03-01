@@ -1,7 +1,7 @@
 #ifndef AVOCADO_WINDOW_H
 #define AVOCADO_WINDOW_H
 
-#include "main/avocado-global.h"
+#include "core/avocado-global.h"
 
 #include <string>
 

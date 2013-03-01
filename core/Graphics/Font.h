@@ -1,10 +1,10 @@
 #ifndef AVOCADO_SFMLFONT_H
 #define AVOCADO_SFMLFONT_H
 
-#include "main/avocado-global.h"
+#include "core/avocado-global.h"
 
-#include "main/FS.h"
-#include "main/ResourceManager.h"
+#include "core/FS.h"
+#include "core/ResourceManager.h"
 
 #include "Image.h"
 

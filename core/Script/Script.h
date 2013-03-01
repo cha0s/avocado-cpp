@@ -1,11 +1,11 @@
 #ifndef AVOCADO_SCRIPT_H
 #define AVOCADO_SCRIPT_H
 
-#include "main/avocado-global.h"
+#include "core/avocado-global.h"
 
 #include <boost/filesystem.hpp>
 
-#include "main/Factory.h"
+#include "core/Factory.h"
 
 namespace avo {
 

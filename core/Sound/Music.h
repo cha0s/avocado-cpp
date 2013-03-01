@@ -1,12 +1,12 @@
 #ifndef AVOCADO_MUSIC_H
 #define AVOCADO_MUSIC_H
 
-#include "main/avocado-global.h"
+#include "core/avocado-global.h"
 
 #include <string>
 
-#include "main/Factory.h"
-#include "main/ResourceManager.h"
+#include "core/Factory.h"
+#include "core/ResourceManager.h"
 
 namespace avo {
 

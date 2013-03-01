@@ -8,7 +8,7 @@ QMAKE_LFLAGS += -g
 
 QMAKE_POST_LINK = cp $(TARGET) $${TARGET}.spii
 
-PRECOMPILED_HEADER = ../../../main/avocado-global.h
+PRECOMPILED_HEADER = ../../../core/avocado-global.h
 
 !debug {
 	CONFIG += silent
@@ -16,9 +16,9 @@ PRECOMPILED_HEADER = ../../../main/avocado-global.h
 
 SOURCES += implementSpi.cpp
 
-HEADERS += ../../../main/avocado-global.h
+HEADERS += ../../../core/avocado-global.h
 
-INCLUDEPATH += ../../.. ../../../main/deps
+INCLUDEPATH += ../../.. ../../../core/deps
 
 unix:OUT_DIR = obj/unix
 

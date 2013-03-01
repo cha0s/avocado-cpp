@@ -1,12 +1,12 @@
 #ifndef AVOCADO_SPIILOADER_H
 #define AVOCADO_SPIILOADER_H
 
-#include "main/avocado-global.h"
+#include "core/avocado-global.h"
 
 #include <boost/extension/shared_library.hpp>
 #include <boost/function.hpp>
 
-#include "main/FS.h"
+#include "core/FS.h"
 
 namespace avo {
 
