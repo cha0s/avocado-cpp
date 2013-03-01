@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 
-#include "../main/FS.h"
+#include "../core/FS.h"
 
 int main(int argc, char **argv) {
 	::testing::InitGoogleTest(&argc, argv);

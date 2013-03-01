@@ -6,7 +6,7 @@ CONFIG += exceptions precompile_header
 
 QMAKE_LFLAGS += -rdynamic
 
-PRECOMPILED_HEADER = ../main/avocado-global.h
+PRECOMPILED_HEADER = ../core/avocado-global.h
 
 !debug {
 	CONFIG += silent
@@ -15,13 +15,13 @@ PRECOMPILED_HEADER = ../main/avocado-global.h
 SOURCES += \
 	main.cpp \
 	\
-	../main/FS.cpp ../main/FS.test.cpp
+	../core/FS.cpp ../core/FS.test.cpp
 
 HEADERS += \
 	\
-	../main/avocado-global.h \
+	../core/avocado-global.h \
 	\
-	../main/FS.h
+	../core/FS.h
 
 INCLUDEPATH += ../deps gtest/include
 
