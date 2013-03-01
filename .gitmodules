@@ -10,3 +10,6 @@
 [submodule "SPI/SFML"]
 	path = SPI/SFML
 	url = git@github.com:cha0s/avocado-spi-sfml.git
+[submodule "core"]
+	path = core
+	url = git://github.com/cha0s/avocado-cpp-core.git
