@@ -5,27 +5,20 @@
 Config = require 'Config'
 
 Core = require 'Core'
-Graphics = require 'Graphics'
-Timing = require 'Timing'
-Sound = require 'Sound'
-
-# Use SFML CoreService for now.
 Core.CoreService.implementSpi Config.coreSpi
 Core.coreService = new Core.CoreService()
 
-# Use SFML GraphicsService for now.
+Graphics = require 'Graphics'
 Graphics.GraphicsService.implementSpi Config.graphicsSpi
 Graphics.graphicsService = new Graphics.GraphicsService()
 
-# Use SFML TimingService for now.
-Timing.TimingService.implementSpi Config.timingSpi
-Timing.timingService = new Timing.TimingService()
-
-# Use SFML SoundService for now.
+Sound = require 'Sound'
 Sound.SoundService.implementSpi Config.soundSpi
 Sound.soundService = new Sound.SoundService()
 
-# Shoot for 60 FPS input and render.
+Timing = require 'Timing'
+Timing.TimingService.implementSpi Config.timingSpi
+Timing.timingService = new Timing.TimingService()
 Timing.ticksPerSecondTarget = Config.ticksPerSecondTarget
 Timing.rendersPerSecondTarget = Config.rendersPerSecondTarget
 
