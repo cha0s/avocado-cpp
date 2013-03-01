@@ -1,0 +1,9 @@
+<map id="SPI/SDL/Graphics/SdlWindow.h" name="SPI/SDL/Graphics/SdlWindow.h">
+<area shape="rect" id="node3" href="$avocado-global_8h.html" title="main/avocado&#45;global.h" alt="" coords="81,411,233,440"/>
+<area shape="rect" id="node11" href="$Window_8h.html" title="SPI/Abstract/Graphics\l/Window.h" alt="" coords="81,83,233,130"/>
+<area shape="rect" id="node36" href="$SdlImage_8h.html" title="SdlImage.h" alt="" coords="257,92,345,121"/>
+<area shape="rect" id="node15" href="$Image_8h.html" title="../Graphics/Image.h" alt="" coords="189,179,325,208"/>
+<area shape="rect" id="node18" href="$FS_8h.html" title="main/FS.h" alt="" coords="448,333,531,363"/>
+<area shape="rect" id="node26" href="$ResourceManager_8h.html" title="SPI/Abstract/ResourceManager.h" alt="" coords="232,256,451,285"/>
+<area shape="rect" id="node32" href="$Factory_8h.html" title="main/Factory.h" alt="" coords="195,333,304,363"/>
+</map>

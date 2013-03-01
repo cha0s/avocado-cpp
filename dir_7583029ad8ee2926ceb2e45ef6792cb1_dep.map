@@ -1,0 +1,17 @@
+<map id="SPI/Qt" name="SPI/Qt">
+<area shape="rect" id="node4" href="dir_0bfb9df0a7418916f720a6523c4c2408.html" title="Core" alt="" coords="37,65,109,113"/>
+<area shape="rect" id="node7" href="dir_5c982d53a68cdbcd421152b4020263a9.html" title="main" alt="" coords="109,161,181,209"/>
+<area shape="rect" id="edge4" href="dir_000010_000000.html" title="3" alt="" coords="119,133,127,150"/>
+<area shape="rect" id="node8" href="dir_469a5496b65ad4bbee5da5a4976a8fbe.html" title="Abstract" alt="" coords="109,257,181,305"/>
+<area shape="rect" id="edge6" href="dir_000010_000003.html" title="1" alt="" coords="118,228,126,246"/>
+<area shape="rect" id="node5" href="dir_cfc81ff8ccb171455b867e4471dd571b.html" title="Graphics" alt="" coords="133,65,208,113"/>
+<area shape="rect" id="edge8" href="dir_000011_000000.html" title="6" alt="" coords="161,137,169,154"/>
+<area shape="rect" id="edge10" href="dir_000011_000003.html" title="2" alt="" coords="180,239,188,256"/>
+<area shape="rect" id="node6" href="dir_2d7a7cb048ae253b34487e1d9463c7be.html" title="Timing" alt="" coords="232,65,304,113"/>
+<area shape="rect" id="edge12" href="dir_000012_000000.html" title="5" alt="" coords="197,151,205,168"/>
+<area shape="rect" id="edge14" href="dir_000012_000003.html" title="2" alt="" coords="188,242,196,259"/>
+<area shape="rect" id="edge16" href="dir_000000_000003.html" title="2" alt="" coords="141,229,149,247"/>
+<area shape="rect" id="edge18" href="dir_000003_000000.html" title="41" alt="" coords="139,220,153,237"/>
+<area shape="rect" id="graph3" href="dir_7583029ad8ee2926ceb2e45ef6792cb1.html" alt="" coords="27,55,411,124"/>
+<area shape="rect" id="graph2" href="dir_910ea0c25e40347172401fe3aa070557.html" title="SPI" alt="" coords="16,16,421,135"/>
+</map>

@@ -1,0 +1,9 @@
+<map id="Resource management" name="Resource management">
+<area shape="rect" id="node1" href="$group__Sound.html" title="The sound SPI handles sound system initialization, as well as music and sample loading and playing..." alt="" coords="383,280,468,309"/>
+<area shape="rect" id="node2" href="$group__SDL.html" title="Avocado&#39;s interface to the Simple DirectMedia Layer." alt="" coords="357,458,493,505"/>
+<area shape="rect" id="node3" href="$group__Qt.html" title="Avocado&#39;s interface to the Qt development framework." alt="" coords="336,541,515,587"/>
+<area shape="rect" id="node4" href="$group__SPI.html" title="Simply put, SPI implementations (SPIIs) provide an way for the engine to do interesting and dynamic t..." alt="" coords="336,944,515,973"/>
+<area shape="rect" id="node6" href="$group__Manufacturing.html" title="Manufacturing functionality handles abstract factory &#160;definition and managing concrete factory instan..." alt="" coords="373,1339,477,1368"/>
+<area shape="rect" id="node7" href="$group__Graphics.html" title="The graphics SPI handles window and graphics system initialization, and rendering." alt="" coords="376,1647,475,1676"/>
+<area shape="rect" id="node8" href="$group__SFML.html" title="Avocado&#39;s interface to the Simple and Fast Multimedia Library." alt="" coords="333,1825,517,1871"/>
+</map>
