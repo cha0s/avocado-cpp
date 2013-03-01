@@ -1,8 +1,0 @@
-.cproject
-.project
-avocado-cpp
-Makefile
-obj
-*.spii
-*.so*
-docs
