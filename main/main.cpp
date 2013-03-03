@@ -93,7 +93,7 @@ int main(int argc, char **argv) {
 		initialize->execute();
 
 		// Load avocado.
-		ScriptService->loadScripts(avo::FS::engineRoot() / "avocado");
+		ScriptService->loadScripts(avo::FS::engineRoot() / "avocado" / "scripts");
 
 		// Load scripts.
 		ScriptService->loadScripts(avo::FS::engineRoot() / "scripts");
