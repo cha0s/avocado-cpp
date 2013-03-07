@@ -51,13 +51,6 @@ Main = class extends (require 'Main')
 		# Keep track of tick timings.
 		@lastTickTime = timeCounter.current()
 	
-	render: (buffer) ->
-		
-		super buffer
-		
-		# Keep track of render timings.
-		@lastRenderTime = timeCounter.current()
-
 main = new Main
 running = true
 	
@@ -71,6 +64,11 @@ main.on 'error', (error) ->
 	Logger.error message
 	
 	main.quit()
+
+main.on 'render', ->
+
+	# Keep track of render timings.
+	main.lastRenderTime = timeCounter.current()
 
 # Close out services and stop running on quit.
 main.on 'quit', ->
