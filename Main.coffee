@@ -26,9 +26,8 @@ Timing.rendersPerSecondTarget = Config.rendersPerSecondTarget
 require 'proxySpiis'
 
 # Register a stderr logging strategy, and implement console.log.
-Logger = require 'Utility/Logger'
-Logger.registerStrategy Logger.stderrStrategy
-@console = log: Logger.info
+@console = log: -> Core.CoreService.writeStderr arg for arg in arguments
+		
 
 timeCounter = new Timing.Counter()
 		
@@ -53,7 +52,7 @@ Main = class extends (require 'Main')
 	
 main = new Main
 running = true
-	
+
 # Log and exit on error.
 main.on 'error', (error) ->
 
@@ -61,7 +60,7 @@ main.on 'error', (error) ->
 		error.stack
 	else
 		error.toString()
-	Logger.error message
+	console.log message
 	
 	main.quit()
 
@@ -82,18 +81,25 @@ main.on 'quit', ->
 
 # Run the hard loop until we receive the quit event.
 main.begin()
-while running
+
+try
+
+	while running
+		
+		# Update time and run intervals and timeouts.
+		Timing.TimingService.setElapsed timeCounter.current() / 1000
+		Timing.tickTimeouts()
+		
+		# Calculate the amount of time we can sleep and do so if we
+		# have enough time.
+		nextWake = Math.min(
+			main.lastTickTime + main.tickFrequency
+			main.lastRenderTime + main.renderFrequency
+		) - timeCounter.current()
+		Timing.timingService.sleep(
+			nextWake * .8 if nextWake > 1
+		)
+
+catch error
 	
-	# Update time and run intervals and timeouts.
-	Timing.TimingService.setElapsed timeCounter.current() / 1000
-	Timing.tickTimeouts()
-	
-	# Calculate the amount of time we can sleep and do so if we
-	# have enough time.
-	nextWake = Math.min(
-		main.lastTickTime + main.tickFrequency
-		main.lastRenderTime + main.renderFrequency
-	) - timeCounter.current()
-	Timing.timingService.sleep(
-		nextWake * .8 if nextWake > 1
-	)
+	main.emit 'error', error
