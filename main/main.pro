@@ -20,7 +20,7 @@ SOURCES += \
 	\
 	../core/Script/Script.cpp ../core/Script/ScriptService.cpp \
 	../core/Core/CoreService.cpp \
-	../core/Graphics/GraphicsService.cpp ../core/Graphics/Font.cpp ../core/Graphics/Image.cpp ../core/Graphics/Window.cpp \
+	../core/Graphics/GraphicsService.cpp ../core/Graphics/Canvas.cpp ../core/Graphics/Font.cpp ../core/Graphics/Image.cpp ../core/Graphics/Window.cpp \
 	../core/Timing/TimingService.cpp ../core/Timing/Counter.cpp \
 	../core/Sound/SoundService.cpp ../core/Sound/Sample.cpp ../core/Sound/Music.cpp
 
@@ -35,7 +35,7 @@ HEADERS += \
 	../core/SpiiLoader.h \
 	../core/Script/Script.h ../core/Script/ScriptService.h \
 	../core/Core/CoreService.h \
-	../core/Graphics/GraphicsService.h ../core/Graphics/Font.h ../core/Graphics/Image.h ../core/Graphics/Window.h \
+	../core/Graphics/GraphicsService.h ../core/Graphics/Canvas.h ../core/Graphics/Font.h ../core/Graphics/Image.h ../core/Graphics/Window.h \
 	../core/Timing/TimingService.h ../core/Timing/Counter.h \ 
 	../core/Sound/SoundService.h ../core/Sound/Sample.h ../core/Sound/Music.h
 
