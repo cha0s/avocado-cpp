@@ -66,7 +66,7 @@ Timing['%setInterval'] = (fn, duration, O) -> newHandle fn, duration, O, true
 
 Timing['%clearTimeout'] = Timing['%clearInterval'] = clearHandle
 
-Timing.tickTimeouts = ->
+Timing.tickTimeouts = (timeCounter) ->
 	
 	for id, handle of handles
 		
@@ -81,4 +81,6 @@ Timing.tickTimeouts = ->
 				handle.thisCall = Timing.TimingService.elapsed()
 
 			handle.fn.apply handle.O
+			
+			Timing.TimingService.setElapsed timeCounter.current() / 1000
 			

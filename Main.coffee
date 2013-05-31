@@ -88,7 +88,7 @@ try
 		
 		# Update time and run intervals and timeouts.
 		Timing.TimingService.setElapsed timeCounter.current() / 1000
-		Timing.tickTimeouts()
+		Timing.tickTimeouts timeCounter
 		
 		# Calculate the amount of time we can sleep and do so if we
 		# have enough time.
@@ -96,9 +96,9 @@ try
 			main.lastTickTime + main.tickFrequency
 			main.lastRenderTime + main.renderFrequency
 		) - timeCounter.current()
-		Timing.timingService.sleep(
-			nextWake * .8 if nextWake > 1
-		)
+		
+		if nextWake > 5
+			Timing.timingService.sleep 5
 
 catch error
 	
