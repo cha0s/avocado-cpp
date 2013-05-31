@@ -1,8 +1,12 @@
 .cproject
 .project
 avocado-cpp
+avocado-cpp.exe
 Makefile
+Makefile.*
 obj
 *.spii
 *.so*
 docs
+main/debug
+main/release

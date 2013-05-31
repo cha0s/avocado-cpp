@@ -4,7 +4,9 @@ TEMPLATE = app
 CONFIG -= qt
 CONFIG += exceptions precompile_header
 
-QMAKE_LFLAGS += -rdynamic
+!win32 {
+	QMAKE_LFLAGS += -rdynamic
+}
 
 PRECOMPILED_HEADER = ../core/avocado-global.h
 
@@ -42,6 +44,10 @@ HEADERS += \
 INCLUDEPATH += ../core/deps ..
 
 LIBS += -lboost_filesystem -lboost_regex -lboost_system -lboost_program_options
+
+win32 {
+	LIBS += -ldl
+}
 
 unix:OUT_DIR = obj/unix
 
