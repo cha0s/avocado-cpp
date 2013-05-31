@@ -49,6 +49,7 @@ win32 {
 	LIBS += -ldl
 }
 
+win32:OUT_DIR = obj/win32
 unix:OUT_DIR = obj/unix
 
 OBJECTS_DIR = $$OUT_DIR
@@ -56,5 +57,15 @@ OBJECTS_DIR = $$OUT_DIR
 unix:QMAKE_CXXFLAGS += -ansi -Werror
 
 main.path = ..
-main.files += avocado-cpp
+win32 {
+	debug {
+		main.files += debug/avocado-cpp.exe
+	}
+	else {
+		main.files += release/avocado-cpp.exe
+	}
+}
+else {
+	main.files += avocado-cpp
+}
 INSTALLS += main
