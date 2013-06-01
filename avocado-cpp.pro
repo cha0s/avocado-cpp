@@ -2,4 +2,4 @@ TEMPLATE = subdirs
 
 CONFIG += ordered
 
-SUBDIRS += SPI main
+SUBDIRS += core SPI main

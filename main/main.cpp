@@ -67,9 +67,6 @@ int main(int argc, char **argv) {
 
 		boost::filesystem::path engineRoot = vm["engine-root"].as<std::string>();
 
-		// Set engine root.
-		avo::FS::setEngineRoot(engineRoot);
-
 		// The native main code's filepath.
 		boost::filesystem::path scriptPath = avo::FS::exePath();
 
@@ -93,10 +90,10 @@ int main(int argc, char **argv) {
 		initialize->execute();
 
 		// Load avocado.
-		ScriptService->loadScripts(avo::FS::engineRoot() / "avocado" / "scripts");
+		ScriptService->loadScripts(engineRoot / "avocado" / "scripts");
 
 		// Load scripts.
-		ScriptService->loadScripts(avo::FS::engineRoot() / "scripts");
+		ScriptService->loadScripts(engineRoot / "scripts");
 
 		avo::Script *main = ScriptService->scriptFromFile(
 			scriptPath / "Main.coffee"

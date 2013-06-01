@@ -9,11 +9,6 @@ win32 {
 		CONFIG += console
 	}
 }
-else {
-	QMAKE_LFLAGS += -rdynamic
-}
-
-PRECOMPILED_HEADER = ../core/avocado-global.h
 
 !debug {
 	CONFIG += silent
@@ -21,15 +16,7 @@ PRECOMPILED_HEADER = ../core/avocado-global.h
 
 SOURCES += \
 	\
-	main.cpp \
-	\
-	../core/FS.cpp \
-	\
-	../core/Script/Script.cpp ../core/Script/ScriptService.cpp \
-	../core/Core/CoreService.cpp \
-	../core/Graphics/GraphicsService.cpp ../core/Graphics/Canvas.cpp ../core/Graphics/Font.cpp ../core/Graphics/Image.cpp ../core/Graphics/Window.cpp \
-	../core/Timing/TimingService.cpp ../core/Timing/Counter.cpp \
-	../core/Sound/SoundService.cpp ../core/Sound/Sample.cpp ../core/Sound/Music.cpp
+	main.cpp
 
 HEADERS += \
 	\
@@ -48,7 +35,11 @@ HEADERS += \
 
 INCLUDEPATH += ../core/deps ..
 
-LIBS += -lboost_filesystem -lboost_regex -lboost_system -lboost_program_options
+LIBS += -L../core -lavocado
+!win32 {
+	LIBS += -lboost_filesystem -lboost_regex -lboost_system
+}
+LIBS += -lboost_program_options
 
 win32 {
 	LIBS += -ldl
