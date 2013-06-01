@@ -10,3 +10,4 @@ obj
 docs
 main/debug
 main/release
+object_script.*

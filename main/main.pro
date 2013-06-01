@@ -4,7 +4,12 @@ TEMPLATE = app
 CONFIG -= qt
 CONFIG += exceptions precompile_header
 
-!win32 {
+win32 {
+	debug {
+		CONFIG += console
+	}
+}
+else {
 	QMAKE_LFLAGS += -rdynamic
 }
 
