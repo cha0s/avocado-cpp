@@ -35,15 +35,20 @@ HEADERS += \
 
 INCLUDEPATH += ../core/deps ..
 
-LIBS += -L../core -lavocado
-!win32 {
-	LIBS += -lboost_filesystem -lboost_regex -lboost_system
-}
-LIBS += -lboost_program_options
-
 win32 {
+	debug {
+		LIBS += -L../core/debug
+	}
+	else {
+		LIBS += -L../core/release
+	}
 	LIBS += -ldl
 }
+else {
+	LIBS += -L../core
+	LIBS += -lboost_filesystem -lboost_regex -lboost_system
+}
+LIBS += -lavocado -lboost_program_options
 
 win32:OUT_DIR = obj/win32
 unix:OUT_DIR = obj/unix
