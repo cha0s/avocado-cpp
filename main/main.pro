@@ -42,7 +42,6 @@ win32 {
 	else {
 		LIBS += -L../core/release
 	}
-	LIBS += -ldl
 }
 else {
 	LIBS += -L../core
