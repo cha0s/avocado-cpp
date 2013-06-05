@@ -45,7 +45,7 @@ win32 {
 }
 else {
 	LIBS += -L../core
-	LIBS += -lboost_filesystem -lboost_regex -lboost_system
+	LIBS += -lboost_filesystem -lboost_system
 }
 LIBS += -lavocado -lboost_program_options
 
