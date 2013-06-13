@@ -41,7 +41,7 @@ Main = class extends (require 'Main')
 		# will happen, and relieve the CPU between.
 		@lastTickTime = @lastRenderTime = timeCounter.current()
 		
-		@stateChange = name: 'Initial', args: {}
+		@transitionToState 'Initial'
 	
 	tick: ->
 		
