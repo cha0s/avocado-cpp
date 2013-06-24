@@ -30,7 +30,8 @@ require 'proxySpiis'
 		
 
 timeCounter = new Timing.Counter()
-		
+originalTimestamp = timeCounter.current()
+
 Main = class extends (require 'Main')
 
 	constructor: ->
@@ -39,7 +40,7 @@ Main = class extends (require 'Main')
 		
 		# Keep track of ticks and renders so we can calculate when the next one
 		# will happen, and relieve the CPU between.
-		@lastTickTime = @lastRenderTime = timeCounter.current()
+		@lastTickTime = @lastRenderTime = (timeCounter.current() - originalTimestamp)
 		
 		@transitionToState 'Initial'
 	
@@ -48,7 +49,7 @@ Main = class extends (require 'Main')
 		super
 		
 		# Keep track of tick timings.
-		@lastTickTime = timeCounter.current()
+		@lastTickTime = (timeCounter.current() - originalTimestamp)
 	
 main = new Main
 running = true
