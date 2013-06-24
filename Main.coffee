@@ -75,11 +75,6 @@ main.on 'quit', ->
 
 	running = false
 
-	Sound.soundService.close()
-	Timing.timingService.close()
-	Graphics.graphicsService.close()
-	Core.coreService.close()
-
 # Run the hard loop until we receive the quit event.
 main.begin()
 
@@ -88,19 +83,27 @@ try
 	while running
 		
 		# Update time and run intervals and timeouts.
-		Timing.TimingService.setElapsed timeCounter.current() / 1000
-		Timing.tickTimeouts timeCounter
+		Timing.TimingService.setElapsed(
+			(timeCounter.current() - originalTimestamp) / 1000
+		)
+		Timing.tickTimeouts timeCounter, originalTimestamp
 		
 		# Calculate the amount of time we can sleep and do so if we
 		# have enough time.
 		nextWake = Math.min(
 			main.lastTickTime + main.tickFrequency
 			main.lastRenderTime + main.renderFrequency
-		) - timeCounter.current()
+		) - (timeCounter.current() - originalTimestamp)
 		
 		if nextWake > 5
 			Timing.timingService.sleep 5
 
+
 catch error
 	
 	main.emit 'error', error
+
+Sound.soundService.close()
+Timing.timingService.close()
+Graphics.graphicsService.close()
+Core.coreService.close()
