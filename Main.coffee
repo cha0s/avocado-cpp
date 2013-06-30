@@ -22,37 +22,34 @@ Timing.timingService = new Timing.TimingService()
 Timing.ticksPerSecondTarget = Config.ticksPerSecondTarget
 Timing.rendersPerSecondTarget = Config.rendersPerSecondTarget
 
-# SPI proxies.
+# Monkey patches & SPI proxies.
+require 'monkeyPatches'
 require 'proxySpiis'
 
 # Register a stderr logging strategy, and implement console.log.
 @console = log: -> Core.CoreService.writeStderr arg for arg in arguments
-		
+
+
+Main = require 'Main'
 
 timeCounter = new Timing.Counter()
 originalTimestamp = timeCounter.current()
 
-Main = class extends (require 'Main')
+lastRenderTime = timeCounter.current()
+lastTickTime = timeCounter.current()
 
-	constructor: ->
-		
-		super
-		
-		# Keep track of ticks and renders so we can calculate when the next one
-		# will happen, and relieve the CPU between.
-		@lastTickTime = @lastRenderTime = (timeCounter.current() - originalTimestamp)
-		
-		@transitionToState 'Initial'
-	
-	tick: ->
-		
-		super
-		
-		# Keep track of tick timings.
-		@lastTickTime = (timeCounter.current() - originalTimestamp)
-	
-main = new Main
+main = new Main()
 running = true
+
+main.on 'tick', ->
+
+	# Keep track of tick timings.
+	lastTickTime = timeCounter.current()
+
+main.on 'render', ->
+
+	# Keep track of render timings.
+	lastRenderTime = timeCounter.current()
 
 # Log and exit on error.
 main.on 'error', (error) ->
@@ -64,11 +61,6 @@ main.on 'error', (error) ->
 	console.log message
 	
 	main.quit()
-
-main.on 'render', ->
-
-	# Keep track of render timings.
-	main.lastRenderTime = timeCounter.current()
 
 # Close out services and stop running on quit.
 main.on 'quit', ->
@@ -91,13 +83,11 @@ try
 		# Calculate the amount of time we can sleep and do so if we
 		# have enough time.
 		nextWake = Math.min(
-			main.lastTickTime + main.tickFrequency
-			main.lastRenderTime + main.renderFrequency
-		) - (timeCounter.current() - originalTimestamp)
+			lastTickTime + main.tickFrequency
+			lastRenderTime + main.renderFrequency
+		) - timeCounter.current()
 		
-		if nextWake > 5
-			Timing.timingService.sleep 5
-
+		Timing.timingService.sleep nextWake if nextWake >= 5
 
 catch error
 	
