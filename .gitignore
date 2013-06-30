@@ -5,6 +5,7 @@ avocado-cpp
 avocado-cpp.exe
 Makefile
 Makefile.*
+npm-debug.log
 obj
 *.spii
 *.so
