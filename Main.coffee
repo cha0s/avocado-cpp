@@ -28,7 +28,7 @@ require 'proxySpiis'
 
 # Register a stderr logging strategy, and implement console.log.
 @console = log: -> Core.CoreService.writeStderr arg for arg in arguments
-
+@console.warn = @console.info = @console.error = @console.log
 
 Main = require 'Main'
 
