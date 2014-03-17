@@ -1,8 +1,33 @@
 
 # Implement require in the spirit of NodeJS.
-@require = (name) ->
+
+_resolveModuleName = (name, parentFilename) ->
 	
-	throw new Error "Module #{name} not found!" unless requires_[name]?
+	tried = [parentFilename]
+	
+	checkModuleName = (name) ->
+		tried.push name
+		return name if requires_[name]
+		tried.push "#{name}/index"
+		return "#{name}/index" if requires_["#{name}/index"]?
+		
+	return checked if (checked = checkModuleName name)?
+	
+	# Resolve relative paths.
+	path = _require 'Node/path'
+	return checked if (checked = checkModuleName(
+		path.resolve(
+			path.dirname parentFilename
+			name
+		).substr 1
+	))?
+	
+	throw new Error tried.join '\n'
+	throw new Error "Cannot find module '#{name}'"
+
+_require = (name, parentFilename) ->
+	
+	name = _resolveModuleName name, parentFilename
 	
 	unless requires_[name].module?
 		exports = {}
@@ -11,9 +36,22 @@
 		f = requires_[name]
 		requires_[name] = module: module
 		
-		f.call null, module, exports
+		path = _require 'Node/path'
+		
+		# Need to check for dirname, since when 'path' is required the first
+		# time, it won't be available.
+		__dirname = (path.dirname? name) ? ''
+		__filename = name
+		
+		f(
+			module, exports
+			(name) -> _require name, __filename
+			__dirname, __filename
+		)
 		
 	requires_[name].module.exports
+
+@require = (name) -> _require name, ''
 
 # Implement mock asynchronicity.
 handles = {}
@@ -29,6 +67,9 @@ setCallback = (fn, duration, O, isInterval) ->
 	duration: duration / 1000
 	thisCall: Timing.TimingService.elapsed()
 	isInterval: isInterval
+
+next = []
+@process = nextTick: (fn) -> next.push fn
 
 newHandle = (fn, duration, O, isInterval) ->
 	
@@ -70,6 +111,10 @@ Timing.tickTimeouts = (timeCounter, originalTimestamp) ->
 	
 	for id, handle of handles
 		
+		imm = next
+		next = []
+		f() for f in imm
+		
 		if Timing.TimingService.elapsed() >= handle.thisCall + handle.duration
 			
 			if not handle.isInterval
@@ -82,7 +127,7 @@ Timing.tickTimeouts = (timeCounter, originalTimestamp) ->
 
 			handle.fn.apply handle.O
 			
-			Timing.TimingService.setElapsed(
-				(timeCounter.current() - originalTimestamp) / 1000
-			)
+		Timing.TimingService.setElapsed(
+			(timeCounter.current() - originalTimestamp) / 1000
+		)
 			
