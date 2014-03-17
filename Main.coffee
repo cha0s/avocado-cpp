@@ -23,8 +23,8 @@ Timing.ticksPerSecondTarget = Config.ticksPerSecondTarget
 Timing.rendersPerSecondTarget = Config.rendersPerSecondTarget
 
 # Monkey patches & SPI proxies.
-require 'monkeyPatches'
 require 'proxySpiis'
+require 'monkeyPatches'
 
 # Register a stderr logging strategy, and implement console.log.
 @console = log: -> Core.CoreService.writeStderr arg for arg in arguments
