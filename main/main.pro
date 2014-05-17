@@ -47,7 +47,7 @@ else {
 	LIBS += -L../core
 	LIBS += -lboost_filesystem -lboost_system
 }
-LIBS += -lavocado -lboost_program_options
+LIBS += -lavocado -lboost_program_options -ldl
 
 win32:OUT_DIR = obj/win32
 unix:OUT_DIR = obj/unix
