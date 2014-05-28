@@ -13,6 +13,7 @@ include(${AVOCADO_CPP_CORE_DIRECTORY}/CMakeLists-core.txt)
 
 project(avocado-cpp)
 
+set(EXECUTABLE_OUTPUT_PATH "${PROJECT_BINARY_DIR}")
 set(LIBRARY_OUTPUT_PATH "${PROJECT_BINARY_DIR}/lib")
 
 add_subdirectory(core)
