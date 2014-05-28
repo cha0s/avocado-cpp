@@ -1,15 +1,4 @@
-.cproject
-.project
-avocado.dll
-avocado-cpp
-avocado-cpp.exe
-Makefile
-Makefile.*
+build
 npm-debug.log
-obj
-*.spii
-*.so
+SPII
 docs
-main/debug
-main/release
-object_script.*
