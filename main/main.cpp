@@ -1,4 +1,4 @@
-#include "core/avocado-global.h"
+#include "avocado-global.h"
 
 #include <boost/filesystem/operations.hpp>
 
@@ -6,9 +6,9 @@
 #include <boost/program_options/parsers.hpp>
 #include <boost/program_options/variables_map.hpp>
 
-#include "core/FS.h"
-#include "core/Script/ScriptService.h"
-#include "core/SpiiLoader.h"
+#include "FS.h"
+#include "Script/ScriptService.h"
+#include "SpiiLoader.h"
 
 namespace po = boost::program_options;
 
