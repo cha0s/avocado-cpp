@@ -80,33 +80,32 @@ int main(int argc, char **argv) {
 
 		// Load the Script SPII.
 		std::string scriptSpii = vm["script-spii"].as<std::string>();
-		avo::SpiiLoader<avo::ScriptService> scriptServiceSpiiLoader;
-		scriptServiceSpiiLoader.implementSpi(scriptSpii);
+		avo::SpiiLoader spiiLoader;
+		spiiLoader.implementSpi<avo::ScriptService>(scriptSpii);
 
 		// Instantiate the Script system.
 		avo::ScriptService *ScriptService = avo::ScriptService::factoryManager.instance()->create();
 
-		// Initialize the engine.
-		avo::Script *initialize = ScriptService->scriptFromFile(
-			scriptPath / "Initialize.coffee"
-		);
-		initialize->execute();
+		// Bootstrap.
+		ScriptService->loadScripts(scriptPath / "bootstrap", false);
 
 		// Load avocado.
 		ScriptService->loadScripts(engineRoot / "avocado" / "scripts");
+
+		// Load C++ scripts.
+		ScriptService->loadScripts(scriptPath / "scripts");
 
 		// Load scripts.
 		ScriptService->loadScripts(engineRoot / "scripts");
 
 		avo::Script *main = ScriptService->scriptFromFile(
-			scriptPath / "Main.coffee"
+			scriptPath / "main.coffee"
 		);
 
 		// Execute the main loop.
 		main->execute();
 
 		delete main;
-		delete initialize;
 
 		delete ScriptService;
 	}
