@@ -13,6 +13,8 @@ include(${AVOCADO_CPP_CORE_DIRECTORY}/CMakeLists-core.txt)
 
 project(avocado-cpp)
 
+find_package(Boost 1.54.0 REQUIRED program_options)
+
 set(EXECUTABLE_OUTPUT_PATH "${PROJECT_BINARY_DIR}")
 set(LIBRARY_OUTPUT_PATH "${PROJECT_BINARY_DIR}/lib")
 
