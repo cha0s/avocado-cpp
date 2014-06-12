@@ -1,6 +1,3 @@
-# Subclass avo.Main. We track tick and render timings to implement CPU relief
-# by sleeping between, and a hard loop where we manually update the time
-# elapsed, since we need to invoke intervals and timeouts out-of-band.
 
 spii.proxy() for spii in [
 	Core = require 'avo/core'
